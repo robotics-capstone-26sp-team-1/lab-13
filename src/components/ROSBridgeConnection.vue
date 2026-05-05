@@ -6,19 +6,23 @@ import { ref } from 'vue'
 const ros = new Ros()
 const rosConnected = ref(false)
 const rosIp = ref('localhost')
+const emit = defineEmits(['connected', 'disconnected'])
 
 // Connection handlers.
 ros.on('connection', () => {
   console.log('Connected to ROS bridge!')
   rosConnected.value = true
+  emit('connected')
 })
 ros.on('error', (err) => {
   console.error(`ROS bridge connection error: ${err}`)
   rosConnected.value = false
+  emit('disconnected')
 })
 ros.on('close', () => {
   console.log('ROS bridge connection closed!')
   rosConnected.value = false
+  emit('disconnected')
 })
 
 // Functions.

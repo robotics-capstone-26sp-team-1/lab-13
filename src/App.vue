@@ -2,6 +2,10 @@
 import ROSBridgeConnection from '@/components/ROSBridgeConnection.vue'
 import PoseManager from '@/components/PoseManager.vue'
 import PoseSequencer from '@/components/PoseSequencer.vue'
+
+import { ref } from 'vue'
+
+const isConnected = ref(true)
 </script>
 
 <template>
@@ -12,10 +16,12 @@ import PoseSequencer from '@/components/PoseSequencer.vue'
       </template>
     </Menubar>
     <br />
-    <ROSBridgeConnection />
+    <ROSBridgeConnection @connected="isConnected = true" @disconnected="isConnected = false" />
     <br />
-    <PoseManager />
-    <br />
-    <PoseSequencer />
+    <div v-if="isConnected">
+      <PoseManager />
+      <br />
+      <PoseSequencer />
+    </div>
   </div>
 </template>
