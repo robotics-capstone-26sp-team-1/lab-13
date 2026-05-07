@@ -28,8 +28,8 @@ function deletePose(name: string) {
 function addPoseToSequence(pose: NamedLink) {
   sequence.value.push(pose)
 }
-function removePoseFromSequence(pose: string) {
-  sequence.value = sequence.value.filter((p) => p.name !== pose)
+function removePoseFromSequence(index: number) {
+  sequence.value.splice(index, 1)
 }
 </script>
 

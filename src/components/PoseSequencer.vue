@@ -9,11 +9,11 @@ const { sequence } = defineProps<{
 }>()
 
 // State.
-const selectedPose = ref<string | undefined>()
-const sequenceOptions = computed(() => Object.keys(sequence))
+const selectedPose = ref<number | undefined>()
+const sequenceOptions = computed(() => sequence.map(({ name }, index) => ({ name, index })))
 
 // Events.
-const emit = defineEmits<{ (e: 'onDeleteFromSequence', name: string): void }>()
+const emit = defineEmits<{ (e: 'onDeleteFromSequence', index: number): void }>()
 
 // Functions.
 function deletePose() {
@@ -24,10 +24,10 @@ function deletePose() {
 
 <template>
   <Panel header="Sequencer">
-    <Listbox v-model="selectedPose" :options="sequenceOptions" multiple />
+    <Listbox v-model="selectedPose" :options="sequenceOptions" optionLabel="name" optionValue="index" />
     <br />
     <div class="flex gap-4">
-      <Button label="Delete Pose" severity="danger" :disabled="!selectedPose" @click="deletePose" />
+      <Button label="Delete Pose" severity="danger" :disabled="selectedPose === undefined" @click="deletePose" />
       <Button label="Run" />
     </div>
   </Panel>
