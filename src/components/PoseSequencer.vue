@@ -58,7 +58,7 @@ async function runSetPoseGoal(goalMessage: SetPoseGoal): Promise<void> {
   const actionClient = new ActionClient({
     ros,
     serverName: '/set_pose',
-    actionName: 'stretch_pose_interfaces/SetPoseAction',
+    actionName: 'stretch_pose_interfaces/action/SetPose',
   })
   const goal = new Goal({
     actionClient,
