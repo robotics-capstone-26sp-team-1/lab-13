@@ -46,7 +46,7 @@ function deletePose() {
   selectedPose.value = undefined
 }
 function sendPose() {
-  emit('onPoseSent', { name: selectedPose.value!, link: selectedFrame.value })
+  emit('onPoseSent', { name: selectedPose.value!, link: selectedFrame.value})
 }
 </script>
 
@@ -68,7 +68,7 @@ function sendPose() {
     <br />
     <br />
     <div class="flex gap-4">
-      <Select v-model="selectedFrame" :options="frames" optionLabel="name" optionValue="frame" />
+      <Select v-model="selectedFrame" :options="frames" optionLabel="name" optionValue="link" />
       <Button label="Add to Sequence" :disabled="!selectedPose" @click="sendPose" />
     </div>
   </Panel>
